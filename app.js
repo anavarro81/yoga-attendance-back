@@ -1,4 +1,5 @@
 const  express = require('express');
+const userRoutes = require('./src/routes/user.routes');
 
 // Para medir el rendimiento de las peticiones.
 const morgan = require('morgan')
@@ -21,6 +22,8 @@ app.use( (req, res, next)  => {
     console.log('Entrando al middleware');
     next()
 })
+
+app.use('/user', userRoutes)
 
 app.get('/', (req, res)=> {
     res.send('Hola mundo!!')

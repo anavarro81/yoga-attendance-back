@@ -1,0 +1,125 @@
+const crypto = require('crypto');
+const mongoose = require('mongoose');
+const validator = require('validator');
+const bcrypt = require('bcrypt')
+
+
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, 'Please tell us your name'],
+  },
+  email: {
+    type: String,
+    required: [true, 'Please provide your email'],
+    // Set the email as unique
+    unique: true,
+    // Remove white spaces
+    trim: true,
+    // Guarda el email en minusculas
+    lowercase: true,
+    validate: [validator.isEmail, 'Please provide a valid email']
+  },
+  photo: {
+    type: String,
+  },
+
+  role: {
+    type: String,
+    enum: ['user', 'trainer', 'admin'],
+    default: 'user'
+  },
+  password: {
+    type: String,
+    required: [true, 'Please provide a password'],
+    validate: [validator.isStrongPassword, 'It must be a strong passsword'],
+    select: false //hide the field from query result
+  },
+  passwordConfirm: {
+    type: String,
+    required: [true, 'A user must have a password'],
+    validate: [
+      {
+        // This only works on create or save
+        validator: function (el) {
+          return el === this.password;
+        },
+        message: 'Passwords do not match'
+      },
+    ]
+  },
+  passwordChangedAt: Date,
+  passwordResetToken: String,
+  passwordResetExpires: Date,
+  // Para saber si el usuario esta activo o no. Baja lógica del usuario. 
+  active: {
+    type: Boolean,
+    default: true,
+    select: false
+  }
+})
+
+/*****************pre-save middleware*************************/
+// Al salvar en usuarios, se encripta la contraseña si esta ha sido modificada.
+userSchema.pre('save', async function (next) {
+  //Only run this function if password was actually modified
+  if (!this.isModified('password')) return next()
+
+  //Hash the password with cost 12 
+  this.password = await bcrypt.hash(this.password, 12);
+
+  //Delete the passwordConfirm field
+  this.passwordConfirm = undefined;
+
+  next();
+});
+
+// Cuando se cambia la contraseña, se actualiza el campo passwordChangedAt
+userSchema.pre('save', function(next){
+  // Comprueba si la constraseña no ha sido modificada o si es un nuevo usuario
+  if (!this.isModified('password') || this.isNew) return next();
+
+  this.passwordChangedAt = Date.now() -1000;
+  next();
+})
+
+/************Query middleware */
+// Se ejecuta para las querys tipo find. No devuelve los usuarios inactivos
+userSchema.pre(/^find/, function(next) {
+  // This point to the current query
+  this.find({active:{$ne: false}});
+  next();
+})
+
+//Intant Method to compare passsword in the login route
+
+userSchema.methods.correctPassword = async function (candidatePassword, userPasword) {
+  return await bcrypt.compare(candidatePassword, userPasword)
+}
+
+// Instant method to check if user change his password before token expire
+
+userSchema.methods.changedPasswordAfter = function (JWTTimesstamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10); //Convert date to miliseconds
+    return JWTTimesstamp < changedTimestamp
+  }
+  return false;
+}
+
+// Instant method tocreate password reset token
+
+userSchema.methods.createPasswordResetToken = function () {
+  const resetToken = crypto.randomBytes(32).toString('hex');
+  this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex')
+console.log({resetToken}, this.passwordResetToken);
+
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+
+  return resetToken;
+}
+
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;

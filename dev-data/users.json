@@ -1,0 +1,52 @@
+[
+    {
+      "id": "1e7b8f4e-8f6b-4c4a-9b8e-1b8e4f4e8f6b",
+      "name": "Carlos García",
+      "classes_id": ["2e7b8f4e-8f6b-4c4a-9b8e-2b8e4f4e8f6b", "3e7b8f4e-8f6b-4c4a-9b8e-3b8e4f4e8f6b"]
+    },
+    {
+      "id": "4e7b8f4e-8f6b-4c4a-9b8e-4b8e4f4e8f6b",
+      "name": "María Fernández",
+      "classes_id": ["5e7b8f4e-8f6b-4c4a-9b8e-5b8e4f4e8f6b", "6e7b8f4e-8f6b-4c4a-9b8e-6b8e4f4e8f6b"]
+    },
+    {
+      "id": "7e7b8f4e-8f6b-4c4a-9b8e-7b8e4f4e8f6b",
+      "name": "Juan López",
+      "classes_id": ["8e7b8f4e-8f6b-4c4a-9b8e-8b8e4f4e8f6b", "9e7b8f4e-8f6b-4c4a-9b8e-9b8e4f4e8f6b"]
+    },
+    {
+      "id": "ae7b8f4e-8f6b-4c4a-9b8e-ab8e4f4e8f6b",
+      "name": "Ana Martínez",
+      "classes_id": ["be7b8f4e-8f6b-4c4a-9b8e-bb8e4f4e8f6b", "ce7b8f4e-8f6b-4c4a-9b8e-cb8e4f4e8f6b"]
+    },
+    {
+      "id": "de7b8f4e-8f6b-4c4a-9b8e-db8e4f4e8f6b",
+      "name": "Luis Sánchez",
+      "classes_id": ["ee7b8f4e-8f6b-4c4a-9b8e-eb8e4f4e8f6b", "fe7b8f4e-8f6b-4c4a-9b8e-fb8e4f4e8f6b"]
+    },
+    {
+      "id": "0e7b8f4e-8f6b-4c4a-9b8e-0b8e4f4e8f6b",
+      "name": "Laura Pérez",
+      "classes_id": ["1f7b8f4e-8f6b-4c4a-9b8e-1f8e4f4e8f6b", "2f7b8f4e-8f6b-4c4a-9b8e-2f8e4f4e8f6b"]
+    },
+    {
+      "id": "3f7b8f4e-8f6b-4c4a-9b8e-3f8e4f4e8f6b",
+      "name": "Pedro Gómez",
+      "classes_id": ["4f7b8f4e-8f6b-4c4a-9b8e-4f8e4f4e8f6b", "5f7b8f4e-8f6b-4c4a-9b8e-5f8e4f4e8f6b"]
+    },
+    {
+      "id": "6f7b8f4e-8f6b-4c4a-9b8e-6f8e4f4e8f6b",
+      "name": "Marta Ruiz",
+      "classes_id": ["7f7b8f4e-8f6b-4c4a-9b8e-7f8e4f4e8f6b", "8f7b8f4e-8f6b-4c4a-9b8e-8f8e4f4e8f6b"]
+    },
+    {
+      "id": "9f7b8f4e-8f6b-4c4a-9b8e-9f8e4f4e8f6b",
+      "name": "Jorge Díaz",
+      "classes_id": ["af7b8f4e-8f6b-4c4a-9b8e-ab8e4f4e8f6b", "bf7b8f4e-8f6b-4c4a-9b8e-bf8e4f4e8f6b"]
+    },
+    {
+      "id": "cf7b8f4e-8f6b-4c4a-9b8e-cf8e4f4e8f6b",
+      "name": "Elena Moreno",
+      "classes_id": ["df7b8f4e-8f6b-4c4a-9b8e-df8e4f4e8f6b", "ef7b8f4e-8f6b-4c4a-9b8e-ef8e4f4e8f6b"]
+    }
+  ]
